@@ -20,7 +20,7 @@ npm install nodemailer-attachments-parser
 ```javascript
 'use strict';
 
-var parser = require('nodemailer-attachments-parser');
+var attachmentsParser = require('nodemailer-attachments-parser');
 var attachments;
 var mail = {
   attachments = [
@@ -35,16 +35,17 @@ var mail = {
 };
 
 // with default options
-attachments = parser(mail.attachments);
+attachments = attachmentsParser(mail.attachments);
 // { attached: {Array}, related: {Array} }
 
 // using options
 var options = {
   findRelated: true
 };
-attachments = parser(mail.attachments, options);
+attachments = attachmentsParser(mail.attachments, options);
 
 ```
+
 
 ## Options
   * **findRelated** - If true separate related attachments from attached ones. Default: `false`

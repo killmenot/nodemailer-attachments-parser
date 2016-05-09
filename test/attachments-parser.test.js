@@ -4,19 +4,19 @@
 'use strict';
 
 var expect = require('chai').expect;
-var parser = require('../');
-var AttachmentsParser = require('../').AttachmentsParser;
+var attachmentsParser = require('../');
+var AttachmentsParser = attachmentsParser.AttachmentsParser;
 var path = require('path');
 var filename = path.join(__dirname, 'fixtures', 'test.txt');
 
 describe('module', function () {
-  var attachmentsParser;
+  var parser;
   var attachments;
   var attachment;
 
   describe('exports', function () {
-    it('parser should be a function', function () {
-      expect(parser).to.be.a('function');
+    it('attachmentsParser should be a function', function () {
+      expect(attachmentsParser).to.be.a('function');
     });
 
     it('AttachmentsParser should be a function', function () {
@@ -26,15 +26,15 @@ describe('module', function () {
 
   describe('parse()', function () {
     beforeEach(function () {
-      attachmentsParser = new AttachmentsParser();
+      parser = new AttachmentsParser();
     });
 
     it('should be a function', function () {
-      expect(attachmentsParser.parse).to.be.a('function');
+      expect(parser.parse).to.be.a('function');
     });
 
     it('should be empty', function () {
-      attachments = attachmentsParser.parse([]);
+      attachments = parser.parse([]);
       expect(attachments.attached).to.eql([]);
       expect(attachments.related).to.eql([]);
     });
@@ -44,7 +44,7 @@ describe('module', function () {
         path: filename
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
 
       expect(attachment.contentType).to.eql('text/plain');
       expect(attachment.contentDisposition).to.eql('attachment');
@@ -58,7 +58,7 @@ describe('module', function () {
         path: filename
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
 
       expect(attachment.contentType).to.eql('text/plain');
       expect(attachment.contentDisposition).to.eql('attachment');
@@ -74,7 +74,7 @@ describe('module', function () {
         href: url
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
 
       expect(attachment.contentType).to.eql('text/plain');
       expect(attachment.contentDisposition).to.eql('attachment');
@@ -87,7 +87,7 @@ describe('module', function () {
         path: 'data:text/plain;base64,aGVsbG8gd29ybGQ='
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
 
       expect(attachment.contentType).to.eql('text/plain');
       expect(attachment.contentDisposition).to.eql('attachment');
@@ -101,7 +101,7 @@ describe('module', function () {
         content: 'hello world!'
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
 
       expect(attachment.contentType).to.eql('text/plain');
       expect(attachment.contentDisposition).to.eql('attachment');
@@ -115,7 +115,7 @@ describe('module', function () {
         content: new Buffer('hello world!!', 'utf-8')
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
 
       expect(attachment.contentType).to.eql('text/plain');
       expect(attachment.contentDisposition).to.eql('attachment');
@@ -129,7 +129,7 @@ describe('module', function () {
         content: new Buffer('hello new world', 'utf-8')
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
 
       expect(attachment.contentType).to.eql('text/plain');
       expect(attachment.contentDisposition).to.eql('attachment');
@@ -144,7 +144,7 @@ describe('module', function () {
         contentType: 'text/plain'
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
 
       expect(attachment.contentType).to.eql('text/plain');
       expect(attachment.contentDisposition).to.eql('attachment');
@@ -159,7 +159,7 @@ describe('module', function () {
         encoding: 'base64'
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
 
       expect(attachment.contentType).to.eql('text/plain');
       expect(attachment.contentDisposition).to.eql('attachment');
@@ -174,7 +174,7 @@ describe('module', function () {
         contentTransferEncoding: '7bit'
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
       expect(attachment.contentTransferEncoding).to.be.equal('7bit');
     });
 
@@ -183,7 +183,7 @@ describe('module', function () {
         contentType: 'message/partial'
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
       expect(attachment.contentDisposition).to.eql('inline');
     });
 
@@ -192,7 +192,7 @@ describe('module', function () {
         cid: 'some-id'
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
       expect(attachment.cid).to.eql('some-id');
     });
 
@@ -201,7 +201,7 @@ describe('module', function () {
         raw: 'content'
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
       expect(attachment.raw).to.eql('content');
     });
 
@@ -213,7 +213,7 @@ describe('module', function () {
         }]
       }];
 
-      attachment = attachmentsParser.parse(attachments).attached[0];
+      attachment = parser.parse(attachments).attached[0];
       expect(attachment.headers).to.eql([{
         key: 'X-Key-Name',
         value: 'val1'
@@ -222,7 +222,7 @@ describe('module', function () {
 
     context('When options.findRelated enabled', function () {
       beforeEach(function () {
-        attachmentsParser = new AttachmentsParser({
+        parser = new AttachmentsParser({
           findRelated: true
         });
       });
@@ -232,7 +232,7 @@ describe('module', function () {
           cid: 'some-id'
         }];
 
-        attachments = attachmentsParser.parse(attachments);
+        attachments = parser.parse(attachments);
         attachment = attachments.related[0];
 
         expect(attachments.attached).to.eql([]);
@@ -245,11 +245,11 @@ describe('module', function () {
 
   describe('_processDataUrl()', function () {
     beforeEach(function () {
-      attachmentsParser = new AttachmentsParser();
+      parser = new AttachmentsParser();
     });
 
     it('should be a function', function () {
-      expect(attachmentsParser._processDataUrl).to.be.a('function');
+      expect(parser._processDataUrl).to.be.a('function');
     });
 
     it('should do nothing when string is invalid data url', function () {
@@ -257,7 +257,7 @@ describe('module', function () {
         href: 'data:text'
       };
 
-      attachmentsParser._processDataUrl(element);
+      parser._processDataUrl(element);
       expect(element).to.equal(element);
     });
 
@@ -267,7 +267,7 @@ describe('module', function () {
         path: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(data)
       };
 
-      attachmentsParser._processDataUrl(element);
+      parser._processDataUrl(element);
       expect(element.content.toString('utf-8')).to.equal(data);
       expect(element.contentType).to.equal('image/svg+xml');
       expect(element.path).to.be.false;
@@ -278,7 +278,7 @@ describe('module', function () {
         href: 'data:text/plain;base64,SGVsbG8gd29ybGQ='
       };
 
-      attachmentsParser._processDataUrl(element);
+      parser._processDataUrl(element);
       expect(element.content.toString('ascii')).to.equal('Hello world');
       expect(element.contentType).to.equal('text/plain');
       expect(element.href).to.be.false;
