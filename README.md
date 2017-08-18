@@ -1,8 +1,7 @@
 # nodemailer-attachments-parser
 
-# DEPRECATED
-
 [![Build Status](https://travis-ci.org/killmenot/nodemailer-attachments-parser.svg?branch=master)](https://travis-ci.org/killmenot/nodemailer-attachments-parser)
+[![Coverage Status](https://coveralls.io/repos/github/killmenot/nodemailer-attachments-parser/badge.svg?branch=master)](https://coveralls.io/github/killmenot/nodemailer-attachments-parser?branch=master)
 [![Dependency Status](https://gemnasium.com/badges/github.com/killmenot/nodemailer-attachments-parser.svg)](https://gemnasium.com/github.com/killmenot/nodemailer-attachments-parser)
 [![npm version](https://badge.fury.io/js/nodemailer-attachments-parser.svg)](https://badge.fury.io/js/nodemailer-attachments-parser)
 

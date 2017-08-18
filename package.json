@@ -1,11 +1,21 @@
 {
   "name": "nodemailer-attachments-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parse and process nodemailer attachments",
   "main": "index.js",
-  "scripts": {
-    "test": "grunt && mocha"
+  "engines": {
+    "node": ">=4"
   },
+  "scripts": {
+    "lint": "grunt",
+    "test": "mocha",
+    "coverage": "istanbul cover _mocha",
+    "coveralls": "npm run coverage && coveralls < coverage/lcov.info"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:killmenot/nodemailer-attachments-parser.git"
@@ -20,24 +30,29 @@
     "name": "Alexey Kucherenko",
     "url": "https://github.com/killmenot"
   },
-  "contributors": [{
-    "name": "Andris Reinman",
-    "url": "https://github.com/andris9"
-  }],
+  "contributors": [
+    {
+      "name": "Andris Reinman",
+      "url": "https://github.com/andris9"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/killmenot/nodemailer-attachments-parser/issues"
   },
   "homepage": "https://github.com/killmenot/nodemailer-attachments-parser",
   "dependencies": {
-    "libmime": "^2.0.3",
-    "parse-data-url": "^0.1.1"
+    "libmime": "^3.1.0",
+    "parse-data-url": "^0.1.5"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.1.1",
+    "coveralls": "^2.13.1",
     "grunt": "^1.0.1",
-    "grunt-contrib-jshint": "^1.0.0",
-    "load-grunt-tasks": "^3.5.0",
-    "mocha": "^2.4.5"
+    "grunt-contrib-jshint": "^1.1.0",
+    "istanbul": "^0.4.5",
+    "load-grunt-tasks": "^3.5.2",
+    "mocha": "^3.5.0",
+    "pre-commit": "^1.2.2"
   }
 }
