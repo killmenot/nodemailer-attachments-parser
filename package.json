@@ -1,6 +1,6 @@
 {
   "name": "nodemailer-attachments-parser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Parse and process nodemailer attachments",
   "main": "index.js",
   "engines": {
