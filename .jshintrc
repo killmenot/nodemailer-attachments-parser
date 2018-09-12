@@ -1,11 +1,13 @@
 {
   "node": true,
+  "mocha": true,
   "bitwise": true,
-  "camelcase": true,
+  "camelcase": false,
   "curly": true,
+  "esversion": 6,
   "forin": true,
   "immed": true,
-  "latedef": true,
+  "latedef": false,
   "newcap": true,
   "noarg": true,
   "noempty": true,
@@ -14,5 +16,12 @@
   "undef": true,
   "unused": true,
   "trailing": true,
-  "laxcomma": true
+  "laxcomma": true,
+  "globals": {
+    "requirejs": false,
+    "require": false,
+    "define": false,
+    "sinon": false,
+    "should": false
+  }
 }

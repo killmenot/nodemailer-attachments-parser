@@ -6,26 +6,6 @@
   "engines": {
     "node": ">=4"
   },
-  "scripts": {
-    "lint": "grunt",
-    "test": "mocha",
-    "coverage": "istanbul cover _mocha",
-    "coveralls": "npm run coverage && coveralls < coverage/lcov.info"
-  },
-  "pre-commit": [
-    "lint",
-    "test"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:killmenot/nodemailer-attachments-parser.git"
-  },
-  "keywords": [
-    "nodemailer",
-    "attachments",
-    "parser",
-    "processing"
-  ],
   "author": {
     "name": "Alexey Kucherenko",
     "url": "https://github.com/killmenot"
@@ -37,22 +17,50 @@
     }
   ],
   "license": "MIT",
+  "homepage": "https://github.com/killmenot/nodemailer-attachments-parser",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:killmenot/nodemailer-attachments-parser.git"
+  },
   "bugs": {
     "url": "https://github.com/killmenot/nodemailer-attachments-parser/issues"
   },
-  "homepage": "https://github.com/killmenot/nodemailer-attachments-parser",
+  "keywords": [
+    "nodemailer",
+    "attachments",
+    "parser",
+    "processing"
+  ],
+  "scripts": {
+    "lint": "jshint lib test index.js",
+    "test": "mocha",
+    "coverage": "nyc --reporter=html --reporter=text mocha",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
+  "nyc": {
+    "all": true,
+    "include": [
+      "lib/**/*.js"
+    ],
+    "exclude": [
+      "test/**/*.js"
+    ]
+  },
   "dependencies": {
-    "libmime": "^3.1.0",
-    "parse-data-url": "^0.1.5"
+    "libmime": "^4.0.1",
+    "parse-data-url": "^1.0.0"
   },
   "devDependencies": {
-    "chai": "^4.1.1",
-    "coveralls": "^2.13.1",
-    "grunt": "^1.0.1",
-    "grunt-contrib-jshint": "^1.1.0",
-    "istanbul": "^0.4.5",
-    "load-grunt-tasks": "^3.5.2",
-    "mocha": "^3.5.0",
+    "buffer-from": "^1.1.1",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.2",
+    "jshint": "^2.9.6",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
     "pre-commit": "^1.2.2"
   }
 }
